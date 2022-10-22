@@ -42,6 +42,26 @@ int main()
 
     cin >> start;
 
+    dijkstra(visited, distance, V, G, parent);
+
+    // Display data
+    cout << "Node:\t\t\tCost : \t\t\tPath";
+
+    for(int i=0; i<V; i++)
+    {
+        cout << i << "\t\t\t" << distance[i] << "\t\t\t" << " ";
+
+        cout << i << " ";
+        int parentnode = parent[i];
+
+        while(parentnode != start)
+        {
+            cout << " <== " << parentnode << " ";
+            parentnode = parent[parentnode];
+        }
+        cout << endl;
+
+    }
 
 
     return 0;
@@ -63,10 +83,9 @@ void dijkstra(bool visited[], int distance[], int V, int G[][100], int parent[])
                 //update the distance of adjacent node
                 distance[adj] = distance[nearest] + G[nearest][adj];
                 //update parent node
+                parent[adj] = nearest;
             }
-
         }
-
     }
 }
 //==========================================//
