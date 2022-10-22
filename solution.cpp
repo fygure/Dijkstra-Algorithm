@@ -11,7 +11,6 @@ int main()
 {
     int V = 9;
     Graph g(V);
-
     //initializing graph
     g.addEdge(0, 1, 4);
     g.addEdge(0, 7, 8);
@@ -27,11 +26,8 @@ int main()
     g.addEdge(6, 7, 1);
     g.addEdge(6, 8, 6);
     g.addEdge(7, 8, 7);
-
     //Shortest path
-    g.shortestPath(0);
-
-
+    g.shortestPath(2);
     return 0;
 }
 //==========================================//

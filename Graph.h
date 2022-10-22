@@ -84,7 +84,7 @@ void Graph::shortestPath(int start)
         }
     }
     // Display paths
-    cout << "Vertex Distances from start" << endl;
+    cout << "Vertex\t\tDistances from start" << endl;
     for(int i=0; i<V; i++)
         cout << i << "\t\t" << distance[i] << endl;
 }
