@@ -15,9 +15,22 @@ int getNearest(bool visited[], int distance[], int V);
 //==========================================//
 int main()
 {
+    int infinity = 999;
     // Graph, Vertex, distance matrix variables
-    int V, start, G[100][100];
+    int V, start;
     int distance[100];
+    int G[100][100] = 
+    {
+        {0, 4, 999, 999, 999, 999, 999, 8, 999},
+        {4, 0, 8, 999, 999, 999, 999, 8, 999},
+        {999, 8, 0, 7, 999, 4, 999, 999, 2},
+        {999, 999, 7, 0, 9, 14, 999, 999, 999},
+        {999, 999, 999, 9, 0, 10, 999, 999, 999},
+        {999, 999, 4, 14, 10, 0, 2, 999, 999},
+        {999, 999, 999, 999, 999, 2, 0, 1, 6},
+        {8, 11, 999, 999, 999, 999, 1, 0, 7},
+        {999, 999, 2, 999, 999, 999, 6, 7, 0},
+    };
 
     // For visited nodes
     bool visited[100] = {0};
@@ -27,20 +40,23 @@ int main()
     // Initialize distances from start node and parent array
     for (int i=0; i<V; i++)
     {
-        distance[i] = INFINITY;
+        distance[i] = infinity;
         parent[i] = i;
     }
+    //Number of vertices
+    V = 9;
+    cout << "Number of vertices: " << V << endl;
+    cout << "Start node: ";
+    cin >> start;
         
     distance[start] = 0;
     
-//TODO: CHANGE BELOW TO STATIC DATA
-    cin >> V;
+//uncomment below for manual inputs: CHANGE BELOW TO STATIC DATA
+    
+    // for(int i=0; i<V; i++)
+    //     for(int j=0; j < V; j++)
+    //         cin >> G[i][j];
 
-    for(int i=0; i<V; i++)
-        for(int j=0; j < V; j++)
-            cin >> G[i][j];
-
-    cin >> start;
 
     dijkstra(visited, distance, V, G, parent);
 
@@ -69,6 +85,7 @@ int main()
 //==========================================//
 void dijkstra(bool visited[], int distance[], int V, int G[][100], int parent[])
 {
+    int infinity = 999;
     // V-1 because last node will be remaining node
     for (int i=0; i < V-1; i++)
     {
@@ -78,7 +95,7 @@ void dijkstra(bool visited[], int distance[], int V, int G[][100], int parent[])
         for(int adj = 0; adj < V; adj++)
         {
             // If a nearest node
-            if ((G[nearest][adj] != INFINITY) && (distance[adj] < distance[nearest] + G[nearest][adj]))
+            if ((G[nearest][adj] != infinity) && (distance[adj] < distance[nearest] + G[nearest][adj]))
             {
                 //update the distance of adjacent node
                 distance[adj] = distance[nearest] + G[nearest][adj];
@@ -92,7 +109,8 @@ void dijkstra(bool visited[], int distance[], int V, int G[][100], int parent[])
 // Returns nearest unvisited node by calculating minimum value of distance
 int getNearest(bool visited[], int distance[], int V)
 {
-    int minvalue = INFINITY;
+    int infinity = 999;
+    int minvalue = infinity;
     int minnode = 0;
     for(int i=0; i< V; i++)
     {
@@ -106,4 +124,18 @@ int getNearest(bool visited[], int distance[], int V)
     return minnode;
 }
 //==========================================//
+
+
+/*
+inputs for costs in G
+  0     4   999   999   999   999   999     8   999
+  4     0     8   999   999   999   999     8   999
+999     8     0     7   999     4   999   999     2
+999   999     7     0     9    14   999   999   999
+999   999   999     9     0    10   999   999   999
+999   999     4    14    10     0     2   999   999
+999   999   999   999   999     2     0     1     6
+  8    11   999   999   999   999     1     0     7
+999   999     2   999   999   999     6     7     0
+*/
 
